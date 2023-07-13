@@ -17,6 +17,11 @@ model User {
   name     String
 }
 
+model Events {
+  author String
+  title String
+  content String
+}
 
 
 
