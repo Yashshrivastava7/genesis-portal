@@ -43,7 +43,7 @@ export default function Register() {
                 type="text"
                 placeholder="Name"
                 name="name"
-                className="rounded-l text-[18px] text-center my-8"
+                className="rounded-l text-[18px] my-8"
                 required
               />
 
@@ -51,7 +51,7 @@ export default function Register() {
                 type="email"
                 placeholder="Email"
                 name="email"
-                className="rounded-l text-[18px] text-center my-15"
+                className="rounded-l text-[18px] my-15"
                 required
               />
 
@@ -60,7 +60,7 @@ export default function Register() {
                 placeholder="Password"
                 name="password"
                 minLength={8}
-                className="rounded-l text-[18px] text-center my-8"
+                className="rounded-l text-[18px] my-8"
                 required
               />
 
