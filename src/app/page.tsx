@@ -9,8 +9,8 @@ export default async function Home() {
   if (!session) {
     return (
       <>
-        <div>
-          <h1>Please Login</h1>
+        <div className="text-center">
+          <h1 className="m-5">Please Login</h1>
           <LoginButton />
         </div>
       </>
@@ -20,9 +20,9 @@ export default async function Home() {
   console.log(session);
   return (
     <>
-      <h1>Hello from Home Page!</h1>
-      <pre>{JSON.stringify(session)}</pre>
-      <div>
+      <h1 className="text-center">Hello from Home Page!</h1>
+      <pre className="text-center m-3">{JSON.stringify(session)}</pre>
+      <div className="text-center m-3">
         <LogoutButton />
       </div>
     </>
