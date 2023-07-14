@@ -3,10 +3,15 @@ import { Button } from '@/components/ui/button'
 import { signIn, signOut } from 'next-auth/react'
 
 export function LoginButton() {
- <button onClick={() => signIn()}>Sign in</button>
+return(
+    <Button onClick={() => signIn()}>Login</Button>
+)
+
 }
 
 export function LogoutButton() {
-    <button onClick={() => signOut()}>Logout</button>
+    return (
+        <Button onClick={() => signOut()}>Logout</Button>        
+    )
 }
 
