@@ -2,7 +2,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 
-export default async function Home() {
+export default async function Blog() {
   const session = await getServerSession(authOptions);
 
   if (!session) {
@@ -12,7 +12,7 @@ export default async function Home() {
   console.log(session);
   return (
     <>
-      <h1>Hello from Home Page!</h1>
+      <h1>Hello from Blog Page!</h1>
       <pre>{JSON.stringify(session)}</pre>
     </>
   );

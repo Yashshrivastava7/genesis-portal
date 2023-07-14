@@ -1,13 +1,13 @@
 "use client";
 import { Input } from "@/components/ui/input";
-import { getSession, signIn, useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import React from "react";
+import { useState } from "react";
 
-export default function Register() {
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
+export default function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -29,7 +29,7 @@ export default function Register() {
     <>
       <div className="h-screen w-screen flex justify-center items-center bg-slate-100 ">
         <div className="flex flex-col px-8 pb-8 pt-12 rounded-xl space-y-12 w-[500px] h-[500px] bg-[#97FEED] shadow-md justify-center">
-          <p className="text-2xl text-center ">Login Here!</p>
+          <p className="text-2xl text-center ">Login</p>
           <form onSubmit={handleSubmit}>
             <Input
               type="email"
@@ -59,7 +59,7 @@ export default function Register() {
             <p className="m-2 text-center">
               Create an account{" "}
               <Link
-                href="/register"
+                href="../register"
                 className="text-indigo-600 hover:text-red-500 underline"
               >
                 here

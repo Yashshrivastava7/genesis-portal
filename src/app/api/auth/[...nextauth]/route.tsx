@@ -45,12 +45,12 @@ export const authOptions: NextAuthOptions = {
           name: user.name,
         };
       },
-    })
+    }),
   ],
 
   pages: {
-    signIn: "/login"
-  }
+    signIn: "/login",
+  },
 };
 
 const handler = NextAuth(authOptions);
