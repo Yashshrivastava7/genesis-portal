@@ -59,7 +59,7 @@ export default function Register() {
             <p className="m-2 text-center">
               Create an account{" "}
               <Link
-                href="../api/auth/signin"
+                href="/register"
                 className="text-indigo-600 hover:text-red-500 underline"
               >
                 here
