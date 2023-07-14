@@ -29,7 +29,7 @@ export default function Register() {
     <>
       <div className="h-screen w-screen flex justify-center items-center bg-slate-100 ">
         <div className="flex flex-col px-8 pb-8 pt-12 rounded-xl space-y-12 w-[500px] h-[500px] bg-[#97FEED] shadow-md justify-center">
-          <p className="text-2xl text-center ">Register Here!</p>
+          <p className="text-2xl text-center ">Login Here!</p>
           <form onSubmit={handleSubmit}>
             <Input
               type="email"
