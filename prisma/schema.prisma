@@ -17,7 +17,7 @@ model User {
   name     String
 }
 
-model Events {
+model Event {
   id       String    @id @default(auto()) @map("_id") @db.ObjectId
   author String
   title String

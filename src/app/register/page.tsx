@@ -30,6 +30,7 @@ export default function Register() {
         name: name as string,
       },
     });
+    console.log(user);
   }
 
   return (
