@@ -20,7 +20,8 @@ export default async function Events() {
       <pre className="text-center m-3">{JSON.stringify(session)}</pre>
       <div className="flex flex-col justify-center items-center text-center">
         {events.map((event) => (
-          <div className="border-solid border-2 m-1 w-40">
+          <div className="border-solid border-2 m-1 w-40" key={event.id}>
+
             <h1>{event.author}</h1>
             <h1>{event.title}</h1>
           </div>
