@@ -4,6 +4,13 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 
+type userType = {
+  id: string;
+  email: string;
+  password: string;
+  name: string;
+};
+
 export const authOptions: NextAuthOptions = {
   session: { strategy: "jwt" },
   secret: process.env.SECRET,
@@ -21,7 +28,7 @@ export const authOptions: NextAuthOptions = {
 
       async authorize(credentials, req) {
         const primsa = new PrismaClient();
-        const user = await primsa.user.findUnique({
+        const user: userType = await primsa.user.findUnique({
           where: {
             email: credentials.email as string,
           },
