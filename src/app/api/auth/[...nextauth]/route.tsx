@@ -9,6 +9,7 @@ type userType = {
   email: string;
   password: string;
   name: string;
+  role: string;
 };
 
 export const authOptions: NextAuthOptions = {
@@ -44,13 +45,14 @@ export const authOptions: NextAuthOptions = {
         );
 
         if (!valid) {
-          return null; 
+          return null;
         }
 
         return {
           id: user.id,
           email: user.email,
           name: user.name,
+          role: user.role,
         };
       },
     }),
@@ -59,6 +61,34 @@ export const authOptions: NextAuthOptions = {
   pages: {
     signIn: "/login",
   },
+
+  callbacks: {
+    session: async ({ session, token }) => {
+      if (token) {
+        return {
+          ...session,
+          user: {
+            ...session.user,
+            role : token.role
+          }
+        }
+      }
+
+      return session; 
+    },
+
+    jwt: async ({ token, user }) => {
+      const u = user as unknown as userType;
+      if (user) {
+        token.id = u.id;
+        token.email = u.email;
+        token.name = u.name;
+        token.role = u.role;
+      }
+      return token;
+    }
+  }
+
 };
 
 const handler = NextAuth(authOptions);
