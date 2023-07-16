@@ -26,10 +26,18 @@ export default async function Events() {
       <h1 className="text-center m-3">Hello from Events Page!</h1>
       <pre className="text-center m-3">{JSON.stringify(session)}</pre>
       <div className="flex flex-col justify-center items-center text-center">
+<<<<<<< HEAD
         {events.map((event: eventType) => (
           <div className="border-solid border-2 m-1 w-40">
             <h1 key={event.id}>{event.author}</h1>
             <h1 key={event.id}>{event.title}</h1>
+=======
+        {events.map((event) => (
+          <div className="border-solid border-2 m-1 w-40" key={event.id}>
+
+            <h1>{event.author}</h1>
+            <h1>{event.title}</h1>
+>>>>>>> 4e87d473fb0cb0656c3eb48faa4c20fa392edfec
           </div>
         ))}
       </div>
