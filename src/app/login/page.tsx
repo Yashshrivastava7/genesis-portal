@@ -2,12 +2,14 @@
 import { Input } from "@/components/ui/input";
 import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
-import { redirect } from "next/navigation";
+import { redirect, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 export default function Login() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const searchParams = useSearchParams();
+  const error = searchParams.get("error") ? "Invalid Credentials" : "";
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -49,6 +51,12 @@ export default function Login() {
               required
               onChange={(e) => setPassword(e.target.value)}
             />
+
+            {error && (
+              <div className="bg-red-300 rounded-md shadow-sm flex justify-center my-5 mx-3">
+                <p className="text-black py-1">{error}</p>
+              </div>
+            )}
 
             <button
               type="submit"
