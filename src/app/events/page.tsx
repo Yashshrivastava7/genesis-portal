@@ -3,9 +3,16 @@ import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import { PrismaClient } from "@prisma/client";
 
+type eventType = {
+  id: string;
+  author: string;
+  title: string;
+  content: string;
+};
+
 export default async function Events() {
   const prisma = new PrismaClient();
-  const events = await prisma.event.findMany();
+  const events: eventType[] = await prisma.event.findMany();
   const session = await getServerSession(authOptions);
   console.log(events);
 
