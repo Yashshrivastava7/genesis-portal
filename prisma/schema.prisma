@@ -30,3 +30,9 @@ model Event {
   content String
 }
 
+model Registration {
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  user String
+  event String
+}
+
