@@ -10,7 +10,7 @@ export default function Register() {
     "use server";
     const email = data.get("email");
     const password = data.get("password");
-    const hash = bcrypt.hash(password, 10);
+    const hash = bcrypt.hash(password as string, 10);
     const name = data.get("name");
     const prisma = new PrismaClient();
     const existingUser = await prisma.user.findUnique({
