@@ -32,7 +32,7 @@ export default async function Events() {
             <h1 key={event.id}>{event.author}</h1>
             <h1 key={event.id}>{event.title}</h1>
             <h1 key={event.id}>{event.content}</h1>
-            <Register />
+            <Register {...event} />
           </div>
         ))}
       </div>
