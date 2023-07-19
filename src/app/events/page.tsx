@@ -2,6 +2,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import { PrismaClient } from "@prisma/client";
+import { Register } from "../auth";
 
 type eventType = {
   id: string;
@@ -30,6 +31,8 @@ export default async function Events() {
           <div className="border-solid border-2 m-1 w-40">
             <h1 key={event.id}>{event.author}</h1>
             <h1 key={event.id}>{event.title}</h1>
+            <h1 key={event.id}>{event.content}</h1>
+            <Register />
           </div>
         ))}
       </div>

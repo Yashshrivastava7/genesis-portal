@@ -9,3 +9,7 @@ export function LoginButton() {
 export function LogoutButton() {
   return <Button onClick={() => signOut()}>Logout</Button>;
 }
+
+export function Register(props) {
+  return <Button onClick={() => console.log(props)}>Register</Button>;
+}
