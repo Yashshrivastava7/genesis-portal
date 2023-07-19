@@ -21,3 +21,10 @@ model User {
   password String
   role     String?
 }
+
+model Registration {
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  user String
+  event String
+}
+
