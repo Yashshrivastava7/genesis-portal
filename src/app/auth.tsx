@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { signIn, signOut } from "next-auth/react";
 
-type eventProps = {
+type eventType = {
   id: string;
   author: string;
   title: string;
@@ -17,6 +17,10 @@ export function LogoutButton() {
   return <Button onClick={() => signOut()}>Logout</Button>;
 }
 
-export function Register(props: eventProps) {
-  return <Button onClick={() => console.log(props)}>Register</Button>;
+export function Register(props: eventType) {
+  return (
+    <Button className="m-2" onClick={() => console.log(props)}>
+      Register
+    </Button>
+  );
 }
