@@ -20,6 +20,7 @@ export default async function AdminDashBoard() {
         <div className="flex flex-col px-8 pb-8 pt-12 rounded-xl space-y-12 w-[500px] h-[500px] bg-[#97FEED] shadow-md justify-center">
           <form action={handleSubmit}>
             <textarea
+              className="p-1"
               rows={1}
               cols={50}
               placeholder="Title"
@@ -27,6 +28,7 @@ export default async function AdminDashBoard() {
               required
             />
             <textarea
+              className="p-1"
               rows={10}
               cols={50}
               placeholder="Content"
