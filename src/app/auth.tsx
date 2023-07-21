@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { signIn, signOut } from "next-auth/react";
-import { createEvent } from "./events/page";
+import { registerEvent } from "./events/page";
 import { useTransition } from "react";
 
 type eventType = {
@@ -24,7 +24,7 @@ export function Register(props: eventType) {
   return (
     <Button
       className="m-2"
-      onClick={() => startTransition(() => createEvent(props))}
+      onClick={() => startTransition(() => registerEvent(props))}
     >
       Register
     </Button>

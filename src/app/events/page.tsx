@@ -12,9 +12,17 @@ type eventType = {
   content: string;
 };
 
-export async function createEvent(props: eventType) {
-  "use server";
+export async function registerEvent(props: eventType) {
+  const prisma = new PrismaClient();
+  const session = await getServerSession(authOptions);
   console.log(props);
+  const register = await prisma.registration.create({
+    data: {
+      user: session.user.email as string,
+      event: props.title as string,
+    },
+  });
+  console.log(register);
 }
 
 export default async function Events() {
