@@ -10,11 +10,17 @@ datasource db {
   url  = env("DATABASE_URL")
 }
 
+enum UserRole {
+  USER
+  ADMIN
+}
+
 model User {
   id       String    @id @default(auto()) @map("_id") @db.ObjectId
   email    String    @unique
   password String    
   name     String
+  role     UserRole      @default(USER)
 }
 
 model Event {
@@ -24,5 +30,9 @@ model Event {
   content String
 }
 
-
+model Registration {
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  user String
+  event String
+}
 
