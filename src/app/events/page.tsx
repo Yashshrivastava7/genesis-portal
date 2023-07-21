@@ -11,7 +11,7 @@ type eventType = {
   title: string;
   content: string;
 };
-
+// Function imported in the client component auth.tsx used as onClick action
 export async function registerEvent(props: eventType) {
   const prisma = new PrismaClient();
   const session = await getServerSession(authOptions);
