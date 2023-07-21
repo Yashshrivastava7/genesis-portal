@@ -8,13 +8,14 @@ datasource db {
 }
 
 model NewEvent {
-  id      String @id @default(auto()) @map("_id") @db.ObjectId
-  title  String
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  title    String
   location String
-  date String
-  content String
+  date     String
+  content  String
   capacity Int
 }
+
 model Event {
   id      String @id @default(auto()) @map("_id") @db.ObjectId
   author  String
@@ -31,8 +32,7 @@ model User {
 }
 
 model Registration {
-  id       String    @id @default(auto()) @map("_id") @db.ObjectId
-  user String
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  user  String
   event String
 }
-
