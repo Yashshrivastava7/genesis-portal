@@ -7,6 +7,14 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model NewEvent {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  title  String
+  location String
+  date String
+  content String
+  capacity Int
+}
 model Event {
   id      String @id @default(auto()) @map("_id") @db.ObjectId
   author  String
