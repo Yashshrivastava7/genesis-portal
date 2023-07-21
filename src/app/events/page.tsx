@@ -1,3 +1,4 @@
+"use server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
@@ -10,6 +11,11 @@ type eventType = {
   title: string;
   content: string;
 };
+
+export async function createEvent(props: eventType) {
+  "use server";
+  console.log(props);
+}
 
 export default async function Events() {
   const prisma = new PrismaClient();
