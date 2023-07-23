@@ -1,5 +1,8 @@
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { PrismaClient } from "@prisma/client";
+import { getServerSession } from "next-auth";
 import Link from "next/link";
+
 
 
 interface newEventType {
@@ -14,10 +17,13 @@ interface newEventType {
 
 
 export default async function EventList() {
-    const prisma = new PrismaClient();
+    const prisma = new PrismaClient(); 
     const newEvents = await prisma.newEvent.findMany();
 
-
+    const session = await getServerSession(authOptions);
+    if (session.user.role !== "ADMIN") {
+        return <h1>Unauthorized</h1>;
+    }
 
     return (
         <>

@@ -1,14 +1,15 @@
 'use client'
+import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import * as XLSX from "xlsx"
 
 export default function EventDB() {
+
     const params = useParams();
-    // console.log(params);
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
-
+    const session = useSession();
     useEffect(() => {
         setLoading(true)
         fetch("/api/fetchevent", {
@@ -23,7 +24,7 @@ export default function EventDB() {
         })
     }, [])
 
-    
+
     function downloadExcel(users) {
         const worksheet = XLSX.utils.json_to_sheet(users);
         const workbook = XLSX.utils.book_new();
@@ -34,6 +35,13 @@ export default function EventDB() {
     if (loading) {
         return (
             <h1>Loading...</h1>
+        )
+    }
+
+
+    if (session.data.user.role !== "ADMIN") {
+        return (
+            <h1>Unauthorized</h1>
         )
     }
 
