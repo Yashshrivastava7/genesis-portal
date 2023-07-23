@@ -2,10 +2,11 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { PrismaClient } from "@prisma/client";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
+import { type } from "os";
 
 
 
-interface newEventType {
+type newEventType =  {
     id: string;
     title: string;
     location: string;
@@ -13,8 +14,6 @@ interface newEventType {
     capacity: number;
     content: string;
 }
-
-
 
 export default async function EventList() {
     const prisma = new PrismaClient(); 

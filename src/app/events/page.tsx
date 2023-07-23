@@ -7,7 +7,7 @@ import { RegisterEvent } from "../auth";
 
 
 
-// New Interface
+// New Type
 type newEventType = {
   title: string;
   location: string;
