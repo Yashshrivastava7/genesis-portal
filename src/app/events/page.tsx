@@ -5,16 +5,13 @@ import { redirect } from "next/navigation";
 import { PrismaClient } from "@prisma/client";
 import { RegisterEvent } from "../auth";
 
-
-
-// New Type
-type newEventType = {
+type eventType = {
   title: string;
   location: string;
   date: string;
   capacity: number;
   content: string;
-}
+};
 
 // Function imported in the client component auth.tsx used as onClick action
 // New Function created by Aaryan
@@ -25,8 +22,8 @@ export async function registerEvent(props: newEventType) {
   const user = await prisma.user.findUnique({
     where: {
       email: session.user.email as string,
-    }
-  })
+    },
+  });
 
   const register = await prisma.registration.create({
     data: {
@@ -34,31 +31,31 @@ export async function registerEvent(props: newEventType) {
       email: session.user.email as string,
       event: props.title as string,
       number: user?.number as string,
-    } as any
-  })
+    } as any,
+  });
   console.log("After Registration => ", register);
 }
 
 export default async function Events() {
   const prisma = new PrismaClient();
   const session = await getServerSession(authOptions);
-  const newEvents: newEventType[] = await prisma.newEvent.findMany();
-
-  // console.log(events);
+  const newEvents: eventType[] = await prisma.newEvent.findMany();
 
   if (!session) {
     redirect("./api/auth/signin");
   }
 
-  // console.log(session);
   return (
     <>
       <h1 className="text-center m-3">Hello from Events Page!</h1>
       <pre className="text-center m-3">{JSON.stringify(session)}</pre>
 
       <div className="flex flex-col justify-center items-center ">
-        {newEvents.map((event: newEventType) => (
-          <div className="flex flex-col justify-center items-center border-solid border-2 m-1 w-52 transition-shadow hover:shadow-lg " key={event.title}>
+        {newEvents.map((event: eventType) => (
+          <div
+            className="flex flex-col justify-center items-center border-solid border-2 m-1 w-52 transition-shadow hover:shadow-lg "
+            key={event.title}
+          >
             <h1>{event.title}</h1>
             <h1>{event.location}</h1>
             <h1>{event.date}</h1>

@@ -1,7 +1,15 @@
-import { getServerSession } from "next-auth"
-import { authOptions } from "../api/auth/[...nextauth]/route"
+import { getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]/route";
 import { PrismaClient } from "@prisma/client";
 import Link from "next/link";
+
+type eventType = {
+  title: string;
+  location: string;
+  date: string;
+  capacity: number;
+  content: string;
+};
 
 export async function dateValidation(date: string) {
   const present = new Date().toISOString();
@@ -16,7 +24,7 @@ export async function dateValidation(date: string) {
 export default async function AdminDashBoard() {
   const session = await getServerSession(authOptions);
   if (session.user.role !== "ADMIN") {
-    return <h1>Unauthorized</h1>;
+    return <h1 className="text-center">Unauthorized</h1>;
   }
   async function handleSubmit(e: FormData) {
     "use server";
@@ -31,8 +39,8 @@ export default async function AdminDashBoard() {
         date: date as string,
         capacity: parseInt(e.get("capacity") as string),
         content: e.get("content") as string,
-      } as any
-    })
+      } as eventType,
+    });
 
     console.log(event);
   }
@@ -41,7 +49,7 @@ export default async function AdminDashBoard() {
     <>
       <h1 className="text-center m-3">Hello from Admin DashBoard</h1>
       <pre className="text-center m-3">{JSON.stringify(session)}</pre>
-      <div className="h-screen w-screen flex justify-center flex-col items-center">
+      <div className="h-screen w-screen flex flex-col items-center">
         <div className="flex flex-col px-8 pb-8 pt-12 rounded-xl space-y-12 w-[500px] h-[500px] bg-[#97FEED] shadow-md justify-center">
 
           <form action={handleSubmit}>
@@ -93,10 +101,8 @@ export default async function AdminDashBoard() {
         </div>
 
         <div className="flex flex-col rounded-xl mt-5 w-100 h-50 px-3 py-3 bg-[#97FEED] shadow-md justify-center">
-          <Link href="/admin/events">
-            View Events
-          </Link>
-          </div>
+          <Link href="/admin/events">View Events</Link>
+        </div>
       </div>
     </>
   );

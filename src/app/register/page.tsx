@@ -5,6 +5,12 @@ import bcrypt from "bcrypt";
 
 import Link from "next/link";
 
+type userType = {
+  email: string;
+  password: string;
+  name: string;
+};
+
 export default function Register() {
   async function handleSubmit(data: FormData) {
     "use server";
@@ -28,7 +34,7 @@ export default function Register() {
         email: email as string,
         password: hash as string,
         name: name as string,
-      } as any
+      } as userType,
     });
     console.log(user);
   }

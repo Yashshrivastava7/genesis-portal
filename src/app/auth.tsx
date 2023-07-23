@@ -4,9 +4,7 @@ import { signIn, signOut } from "next-auth/react";
 import { registerEvent } from "./events/page";
 import { useTransition } from "react";
 
-
-
-type newEventType = {
+type eventType = {
   title: string;
   location: string;
   date: string;
@@ -22,10 +20,9 @@ export function LogoutButton() {
   return <Button onClick={() => signOut()}>Logout</Button>;
 }
 
-
 // New Event Register Button - Aaryan
-export function RegisterEvent(props: newEventType) {
-  let [isPending, startTransition] = useTransition();
+export function RegisterEvent(props: eventType) {
+  let [, startTransition] = useTransition();
   return (
     <Button
       className="m-2"
