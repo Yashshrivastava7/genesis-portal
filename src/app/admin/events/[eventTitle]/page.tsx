@@ -4,10 +4,18 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import * as XLSX from "xlsx";
 
+type userType = {
+  id: string;
+  email: string;
+  password: string;
+  name: string;
+  role: string;
+};
+
 export default function EventDB() {
   const params = useParams();
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [users, setUsers] = useState<userType[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
   const session = useSession();
   useEffect(() => {
     setLoading(true);
@@ -25,7 +33,7 @@ export default function EventDB() {
       });
   }, []);
 
-  function downloadExcel(users) {
+  function downloadExcel(users: userType[]) {
     const worksheet = XLSX.utils.json_to_sheet(users);
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Users");
@@ -33,11 +41,11 @@ export default function EventDB() {
   }
 
   if (loading) {
-    return <h1>Loading...</h1>;
+    return <h1 className="text-center m-5">Loading...</h1>;
   }
 
   if (session.data.user.role !== "ADMIN") {
-    return <h1>Unauthorized</h1>;
+    return <h1 className="text-center m-5">Unauthorized</h1>;
   }
 
   return (
