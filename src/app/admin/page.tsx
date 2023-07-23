@@ -49,7 +49,7 @@ export default async function AdminDashBoard() {
     <>
       <h1 className="text-center m-3">Hello from Admin DashBoard</h1>
       <pre className="text-center m-3">{JSON.stringify(session)}</pre>
-      <div className="h-screen w-screen flex justify-center flex-col items-center">
+      <div className="h-screen w-screen flex flex-col items-center">
         <div className="flex flex-col px-8 pb-8 pt-12 rounded-xl space-y-12 w-[500px] h-[500px] bg-[#97FEED] shadow-md justify-center">
           <form action={handleSubmit}>
             <textarea
