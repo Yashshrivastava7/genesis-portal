@@ -1,5 +1,5 @@
 'use client'
-import { useParams } from "next/navigation";
+import { redirect, useParams } from "next/navigation";
 import submitProfile from "./server";
 import React, { useState } from "react";
 import { useSession } from "next-auth/react";
@@ -9,6 +9,10 @@ import { useSession } from "next-auth/react";
 export default function ProfilePage() {
 
     const session = useSession();
+
+    if(session == null){
+        redirect("/login");
+    }
 
     const [firstname, setFirstname] = useState("");
     const [lastname, setLastname] = useState("");
