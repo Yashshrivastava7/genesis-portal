@@ -23,16 +23,27 @@ model Event {
   title   String
 }
 
+enum Role {
+  USER
+  ADMIN
+}
+
 model User {
   id       String  @id @default(auto()) @map("_id") @db.ObjectId
   email    String  @unique
   name     String
   password String
-  role     String?
+  role     Role   @default(USER)
+  gender  String?   
+  githublink String? 
+  linkedinlink String? 
+  number String?    
 }
 
 model Registration {
   id    String @id @default(auto()) @map("_id") @db.ObjectId
   user  String
   event String
+  email String
+  number String?
 }
