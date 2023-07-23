@@ -1,38 +1,49 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "mongodb"
-  url  = env("DATABASE_URL")
+  url      = env("DATABASE_URL")
 }
 
-enum UserRole {
+model NewEvent {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  title    String
+  location String
+  date     String
+  content  String
+  capacity Int
+}
+
+model Event {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  author  String
+  content String
+  title   String
+}
+
+enum Role {
   USER
   ADMIN
 }
 
 model User {
-  id       String    @id @default(auto()) @map("_id") @db.ObjectId
-  email    String    @unique
-  password String    
+  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+  email    String  @unique
   name     String
-  role     UserRole      @default(USER)
-}
-
-model Event {
-  id       String    @id @default(auto()) @map("_id") @db.ObjectId
-  author String
-  title String
-  content String
+  password String
+  role     Role   @default(USER)
+  gender  String?   
+  githublink String? 
+  linkedinlink String? 
+  number String?    
 }
 
 model Registration {
-  id       String    @id @default(auto()) @map("_id") @db.ObjectId
-  user String
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  user  String
   event String
+  email String
+  number String?
 }
-

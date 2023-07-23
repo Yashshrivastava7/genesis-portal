@@ -2,6 +2,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
 // import { redirect } from "next/navigation";
 import { LoginButton, LogoutButton } from "./auth";
+import Link from "next/link";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
@@ -17,9 +18,12 @@ export default async function Home() {
     );
   }
 
-  console.log(session);
   return (
     <>
+      <Link href={`/profile/uname?=${session.user.name}`}>
+          Profile
+      </Link>
+
       <h1 className="text-center">Hello from Home Page!</h1>
       <pre className="text-center m-3">{JSON.stringify(session)}</pre>
       <div className="text-center m-3">

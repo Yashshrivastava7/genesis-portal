@@ -3,52 +3,71 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import { PrismaClient } from "@prisma/client";
-import { Register } from "../auth";
+import { RegisterEvent } from "../auth";
 
-type eventType = {
-  id: string;
-  author: string;
+
+
+// New Type
+type newEventType = {
   title: string;
+  location: string;
+  date: string;
+  capacity: number;
   content: string;
-};
+}
+
 // Function imported in the client component auth.tsx used as onClick action
-export async function registerEvent(props: eventType) {
+// New Function created by Aaryan
+export async function registerEvent(props: newEventType) {
   const prisma = new PrismaClient();
   const session = await getServerSession(authOptions);
-  console.log(props);
+  console.log(" Props => ", props);
+  const user = await prisma.user.findUnique({
+    where: {
+      email: session.user.email as string,
+    }
+  })
+
   const register = await prisma.registration.create({
     data: {
-      user: session.user.email as string,
+      user: session.user.name as string,
+      email: session.user.email as string,
       event: props.title as string,
-    },
-  });
-  console.log(register);
+      number: user?.number as string,
+    } as any
+  })
+  console.log("After Registration => ", register);
 }
 
 export default async function Events() {
   const prisma = new PrismaClient();
-  const events: eventType[] = await prisma.event.findMany();
   const session = await getServerSession(authOptions);
-  console.log(events);
+  const newEvents: newEventType[] = await prisma.newEvent.findMany();
+
+  // console.log(events);
 
   if (!session) {
     redirect("./api/auth/signin");
   }
 
-  console.log(session);
+  // console.log(session);
   return (
     <>
       <h1 className="text-center m-3">Hello from Events Page!</h1>
       <pre className="text-center m-3">{JSON.stringify(session)}</pre>
-      <div className="flex flex-col justify-center items-center text-center">
-        {events.map((event: eventType) => (
-          <div className="border-solid border-2 m-1 w-52 transition-shadow hover:shadow-lg">
-            <h1>{event.author}</h1>
+
+      <div className="flex flex-col justify-center items-center ">
+        {newEvents.map((event: newEventType) => (
+          <div className="flex flex-col justify-center items-center border-solid border-2 m-1 w-52 transition-shadow hover:shadow-lg " key={event.title}>
             <h1>{event.title}</h1>
+            <h1>{event.location}</h1>
+            <h1>{event.date}</h1>
+            <h1>{event.capacity}</h1>
             <h1>{event.content}</h1>
-            <Register {...event} />
+            <RegisterEvent {...event} />
           </div>
-        ))}
+        ))
+        }
       </div>
     </>
   );
