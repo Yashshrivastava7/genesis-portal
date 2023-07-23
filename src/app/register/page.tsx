@@ -28,7 +28,7 @@ export default function Register() {
         email: email as string,
         password: hash as string,
         name: name as string,
-      }
+      } as any
     });
     console.log(user);
   }
