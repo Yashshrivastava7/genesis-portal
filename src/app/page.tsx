@@ -20,8 +20,11 @@ export default async function Home() {
 
   return (
     <>
-      <Link href={`/profile/uname?=${session.user.name}`}>
-          Profile
+      <Link
+        className="text-center"
+        href={`/profile/uname?=${session.user.name}`}
+      >
+        Profile
       </Link>
 
       <h1 className="text-center">Hello from Home Page!</h1>

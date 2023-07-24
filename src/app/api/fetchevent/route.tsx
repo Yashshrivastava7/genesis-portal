@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 
 export async function POST(req: Request) {
   const body = await req.json();
-  // console.log(body);
+  console.log(body);
 
   const prisma = new PrismaClient();
 
@@ -12,6 +12,6 @@ export async function POST(req: Request) {
     } as any,
   });
 
-  // console.log("Server Side => ", users);
+  console.log("Server Side => ", users);
   return new Response(JSON.stringify({ message: "successful", users: users }));
 }
