@@ -3,6 +3,7 @@ import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import * as XLSX from "xlsx";
+import { getUsers } from "./server";
 
 type userType = {
   id: string;
@@ -32,7 +33,11 @@ export default function EventDB() {
         setLoading(false);
       });
   }, []);
-
+  const hello = async () => {
+    const response = await getUsers(params.eventTitle);
+    console.log(response);
+  };
+  hello();
   function downloadExcel(users: userType[]) {
     const worksheet = XLSX.utils.json_to_sheet(users);
     const workbook = XLSX.utils.book_new();

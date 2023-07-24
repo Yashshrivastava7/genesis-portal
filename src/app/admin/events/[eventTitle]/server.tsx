@@ -1,22 +1,15 @@
 "use server";
 import { PrismaClient } from "@prisma/client";
 
-type eventType = {
-  title: string;
-  location: string;
-  date: string;
-  capacity: number;
-  content: string;
-};
-
 //Server action to get users that have registered on a event
-export async function getUsers(body: eventType) {
+export async function getUsers(body: string) {
   const prisma = new PrismaClient();
 
   const users = await prisma.registration.findMany({
     where: {
-      event: body.title,
+      event: body,
     } as any,
   });
+  console.log("server action: ", users);
   return users;
 }
