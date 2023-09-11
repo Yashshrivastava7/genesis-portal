@@ -32,11 +32,12 @@ export default function EventDB() {
         setUsers(data.users);
         setLoading(false);
       });
-  }, []);
+  }, []); 
   const hello = async () => {
     const response = await getUsers(params.eventTitle);
     console.log(response);
   };
+
   hello();
   function downloadExcel(users: userType[]) {
     const worksheet = XLSX.utils.json_to_sheet(users);

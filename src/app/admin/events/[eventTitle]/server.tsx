@@ -11,5 +11,6 @@ export async function getUsers(body: string) {
     } as any,
   });
   console.log("server action: ", users);
+
   return users;
 }
