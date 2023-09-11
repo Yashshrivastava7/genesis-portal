@@ -21,7 +21,7 @@ export default async function Home() {
   return (
     <>
       <Link
-        className="text-center"
+        className="m-2 text-center"
         href={`/profile/uname?=${session.user.name}`}
       >
         Profile
